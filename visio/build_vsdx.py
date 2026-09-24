@@ -1,88 +1,10 @@
 """Генерує architecture.vsdx — схему архітектури системи для Microsoft Visio."""
-import zipfile
-from xml.sax.saxutils import escape
+import os
 
-S = 0.016            # дюймів на піксель вихідного зображення
-PW, PH = 1060 * S, 580 * S   # розмір сторінки, дюйми
+from vsdx_writer import Diagram
 
-def X(px): return px * S
-def Y(py): return PH - py * S   # у Visio вісь Y спрямована вгору
-
-shapes = []
-_id = [0]
-def nid():
-    _id[0] += 1
-    return _id[0]
-
-def cell(n, v, u=None):
-    return f'<Cell N="{n}" V="{v}"' + (f' U="{u}"' if u else '') + '/>'
-
-def box(x, y, w, h, title, body="", fill="#FFFFFF", line="#999999",
-        dashed=False, label_top=False, round_=0.08, size=9):
-    sid = nid()
-    cx, cy = X(x + w / 2), Y(y + h / 2)
-    W, H = X(w), X(h)
-    text = f'<cp IX="0"/>{escape(title)}'
-    if body:
-        text += f'\n<cp IX="1"/>{escape(body)}'
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
-{cell("PinX", cx)}{cell("PinY", cy)}{cell("Width", W)}{cell("Height", H)}
-{cell("LocPinX", W / 2)}{cell("LocPinY", H / 2)}
-{cell("FillForegnd", fill)}{cell("FillPattern", 1)}
-{cell("LineColor", line)}{cell("LineWeight", 0.0104)}{cell("LinePattern", 2 if dashed else 1)}
-{cell("Rounding", round_)}
-{cell("VerticalAlign", 0 if label_top else 1)}
-{cell("TopMargin", 0.06)}{cell("LeftMargin", 0.1)}
-<Section N="Character">
-<Row IX="0">{cell("Size", size / 72, "PT")}{cell("Style", 1)}{cell("Color", "#1F1F1F")}</Row>
-<Row IX="1">{cell("Size", (size - 1) / 72, "PT")}{cell("Style", 0)}{cell("Color", "#333333")}</Row>
-</Section>
-<Section N="Paragraph"><Row IX="0">{cell("HorzAlign", 0 if label_top else 1)}</Row></Section>
-<Section N="Geometry" IX="0">{cell("NoFill", 0)}{cell("NoLine", 0)}
-<Row T="MoveTo" IX="1">{cell("X", 0)}{cell("Y", 0)}</Row>
-<Row T="LineTo" IX="2">{cell("X", W)}{cell("Y", 0)}</Row>
-<Row T="LineTo" IX="3">{cell("X", W)}{cell("Y", H)}</Row>
-<Row T="LineTo" IX="4">{cell("X", 0)}{cell("Y", H)}</Row>
-<Row T="LineTo" IX="5">{cell("X", 0)}{cell("Y", 0)}</Row>
-</Section>
-<Text>{text}</Text>
-</Shape>''')
-
-def arrow(*pts, color="#444444"):
-    """Ламана зі стрілкою на кінці; pts — точки у пікселях."""
-    sid = nid()
-    xs = [X(p[0]) for p in pts]
-    ys = [Y(p[1]) for p in pts]
-    mx, my = min(xs), min(ys)
-    W, H = max(max(xs) - mx, 0.01), max(max(ys) - my, 0.01)
-    rows = ""
-    for i, (px, py) in enumerate(zip(xs, ys)):
-        t = "MoveTo" if i == 0 else "LineTo"
-        rows += f'<Row T="{t}" IX="{i + 1}">{cell("X", px - mx)}{cell("Y", py - my)}</Row>'
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
-{cell("PinX", mx)}{cell("PinY", my)}{cell("Width", W)}{cell("Height", H)}
-{cell("LocPinX", 0)}{cell("LocPinY", 0)}
-{cell("LineColor", color)}{cell("LineWeight", 0.0139)}{cell("EndArrow", 4)}{cell("EndArrowSize", 1)}
-<Section N="Geometry" IX="0">{cell("NoFill", 1)}{cell("NoLine", 0)}{rows}</Section>
-</Shape>''')
-
-def label(x, y, w, text, h=14):
-    sid = nid()
-    W, H = X(w), X(h)
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
-{cell("PinX", X(x + w / 2))}{cell("PinY", Y(y + h / 2))}{cell("Width", W)}{cell("Height", H)}
-{cell("LocPinX", W / 2)}{cell("LocPinY", H / 2)}
-{cell("FillForegnd", "#FFFFFF")}{cell("FillPattern", 1)}{cell("LinePattern", 0)}
-<Section N="Character"><Row IX="0">{cell("Size", 7.5 / 72, "PT")}{cell("Color", "#333333")}</Row></Section>
-<Section N="Geometry" IX="0">{cell("NoFill", 0)}{cell("NoLine", 1)}
-<Row T="MoveTo" IX="1">{cell("X", 0)}{cell("Y", 0)}</Row>
-<Row T="LineTo" IX="2">{cell("X", W)}{cell("Y", 0)}</Row>
-<Row T="LineTo" IX="3">{cell("X", W)}{cell("Y", H)}</Row>
-<Row T="LineTo" IX="4">{cell("X", 0)}{cell("Y", H)}</Row>
-<Row T="LineTo" IX="5">{cell("X", 0)}{cell("Y", 0)}</Row>
-</Section>
-<Text>{escape(text)}</Text>
-</Shape>''')
+d = Diagram(1060, 580, scale=0.016, page_name="Архітектура")
+box, arrow, label = d.box, d.arrow, d.label
 
 # ---- Рівні (контейнери) ----
 LAYER = dict(fill="#F7F7F7", line="#A0A0A0", dashed=True, label_top=True, round_=0.1)
@@ -147,56 +69,5 @@ label(773, 331, 64, "геометрія доріг")
 arrow((986, 486), (1028, 486), (1028, 8), (138, 8), (138, 50))     # тайли -> карта
 label(1003, 238, 52, "тайли карти")
 
-# ---- Пакування у .vsdx ----
-# Основою є шаблон, збережений самим Visio (з пакета `vsdx`, pip install vsdx):
-# стилі, теми, windows.xml і docProps беруться з нього, замінюється лише сторінка.
-import os
-import re
-
-NS = ("xmlns='http://schemas.microsoft.com/office/visio/2012/main' "
-      "xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships' "
-      "xml:space='preserve'")
-
-
-def template_path():
-    import vsdx
-    return os.path.join(os.path.dirname(vsdx.__file__), "media", "media.vsdx")
-
-
-def patch_pages(xml):
-    xml = re.sub(r"<Cell N='PageWidth' V='[^']*'/>", f"<Cell N='PageWidth' V='{PW}'/>", xml)
-    xml = re.sub(r"<Cell N='PageHeight' V='[^']*'/>", f"<Cell N='PageHeight' V='{PH}'/>", xml)
-    xml = re.sub(r"<Cell N='(PageScale|DrawingScale)' V='[^']*' U='MM'/>",
-                 r"<Cell N='\1' V='1' U='IN'/>", xml)
-    xml = re.sub(r"ViewCenterX='[^']*'", f"ViewCenterX='{PW / 2}'", xml)
-    xml = re.sub(r"ViewCenterY='[^']*'", f"ViewCenterY='{PH / 2}'", xml)
-    return xml.replace("NameU='Page-1' Name='Page-1'", "NameU='Page-1' Name='Архітектура'")
-
-
-def build(out):
-    page = ("<?xml version='1.0' encoding='utf-8' ?>\n"
-            f"<PageContents {NS}><Shapes>\n" + "\n".join(shapes) + "\n</Shapes></PageContents>")
-    with zipfile.ZipFile(template_path()) as tpl, \
-            zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-        for item in tpl.infolist():
-            if item.filename == "docProps/thumbnail.emf":
-                continue    # мініатюра шаблону, не цієї схеми
-            data = tpl.read(item.filename)
-            if item.filename == "_rels/.rels":
-                data = re.sub(rb'<Relationship [^>]*Target="docProps/thumbnail.emf"/>', b"", data)
-            elif item.filename == "visio/pages/page1.xml":
-                data = page.encode("utf-8")
-            elif item.filename == "visio/pages/pages.xml":
-                data = patch_pages(data.decode("utf-8")).encode("utf-8")
-            elif item.filename == "visio/windows.xml":
-                text = data.decode("utf-8")
-                text = re.sub(r"ViewCenterX='[^']*'", f"ViewCenterX='{PW / 2}'", text)
-                text = re.sub(r"ViewCenterY='[^']*'", f"ViewCenterY='{PH / 2}'", text)
-                data = text.encode("utf-8")
-            z.writestr(item.filename, data)
-
-
 if __name__ == "__main__":
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "architecture.vsdx")
-    build(out)
-    print("written", out)
+    d.save(os.path.join(os.path.dirname(os.path.abspath(__file__)), "architecture.vsdx"))

@@ -179,8 +179,12 @@ def build(out):
     with zipfile.ZipFile(template_path()) as tpl, \
             zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         for item in tpl.infolist():
+            if item.filename == "docProps/thumbnail.emf":
+                continue    # мініатюра шаблону, не цієї схеми
             data = tpl.read(item.filename)
-            if item.filename == "visio/pages/page1.xml":
+            if item.filename == "_rels/.rels":
+                data = re.sub(rb'<Relationship [^>]*Target="docProps/thumbnail.emf"/>', b"", data)
+            elif item.filename == "visio/pages/page1.xml":
                 data = page.encode("utf-8")
             elif item.filename == "visio/pages/pages.xml":
                 data = patch_pages(data.decode("utf-8")).encode("utf-8")

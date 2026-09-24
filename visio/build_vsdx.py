@@ -25,7 +25,7 @@ def box(x, y, w, h, title, body="", fill="#FFFFFF", line="#999999",
     text = f'<cp IX="0"/>{escape(title)}'
     if body:
         text += f'\n<cp IX="1"/>{escape(body)}'
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="0" FillStyle="0" TextStyle="0">
+    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
 {cell("PinX", cx)}{cell("PinY", cy)}{cell("Width", W)}{cell("Height", H)}
 {cell("LocPinX", W / 2)}{cell("LocPinY", H / 2)}
 {cell("FillForegnd", fill)}{cell("FillPattern", 1)}
@@ -59,7 +59,7 @@ def arrow(*pts, color="#444444"):
     for i, (px, py) in enumerate(zip(xs, ys)):
         t = "MoveTo" if i == 0 else "LineTo"
         rows += f'<Row T="{t}" IX="{i + 1}">{cell("X", px - mx)}{cell("Y", py - my)}</Row>'
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="0" FillStyle="0" TextStyle="0">
+    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
 {cell("PinX", mx)}{cell("PinY", my)}{cell("Width", W)}{cell("Height", H)}
 {cell("LocPinX", 0)}{cell("LocPinY", 0)}
 {cell("LineColor", color)}{cell("LineWeight", 0.0139)}{cell("EndArrow", 4)}{cell("EndArrowSize", 1)}
@@ -69,7 +69,7 @@ def arrow(*pts, color="#444444"):
 def label(x, y, w, text, h=14):
     sid = nid()
     W, H = X(w), X(h)
-    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="0" FillStyle="0" TextStyle="0">
+    shapes.append(f'''<Shape ID="{sid}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
 {cell("PinX", X(x + w / 2))}{cell("PinY", Y(y + h / 2))}{cell("Width", W)}{cell("Height", H)}
 {cell("LocPinX", W / 2)}{cell("LocPinY", H / 2)}
 {cell("FillForegnd", "#FFFFFF")}{cell("FillPattern", 1)}{cell("LinePattern", 0)}
@@ -143,69 +143,56 @@ label(595, 222, 150, "GeoJSON лінії фронту (кешується)")
 arrow((839, 406), (812, 406), (812, 291), (301, 291), (301, 312))  # Overpass -> production
 label(525, 276, 80, "мережа залізниць")
 arrow((839, 326), (771, 326))                       # OSRM -> map_view
-label(740, 334, 70, "геометрія доріг")
+label(773, 331, 64, "геометрія доріг")
 arrow((986, 486), (1028, 486), (1028, 8), (138, 8), (138, 50))     # тайли -> карта
 label(1003, 238, 52, "тайли карти")
 
-# ---- Пакування у .vsdx (OPC-архів) ----
-NS = 'xmlns="http://schemas.microsoft.com/office/visio/2012/main" ' \
-     'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
-HDR = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n'
+# ---- Пакування у .vsdx ----
+# Основою є шаблон, збережений самим Visio (з пакета `vsdx`, pip install vsdx):
+# стилі, теми, windows.xml і docProps беруться з нього, замінюється лише сторінка.
+import os
+import re
 
-files = {
-"[Content_Types].xml": HDR + '''<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-<Default Extension="xml" ContentType="application/xml"/>
-<Override PartName="/visio/document.xml" ContentType="application/vnd.ms-visio.drawing.main+xml"/>
-<Override PartName="/visio/pages/pages.xml" ContentType="application/vnd.ms-visio.pages+xml"/>
-<Override PartName="/visio/pages/page1.xml" ContentType="application/vnd.ms-visio.page+xml"/>
-<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
-<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
-</Types>''',
-"_rels/.rels": HDR + '''<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.microsoft.com/visio/2010/relationships/document" Target="visio/document.xml"/>
-<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
-<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
-</Relationships>''',
-"docProps/core.xml": HDR + '''<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<dc:title>Архітектура системи</dc:title></cp:coreProperties>''',
-"docProps/app.xml": HDR + '''<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
-<Application>Microsoft Visio</Application></Properties>''',
-"visio/document.xml": HDR + f'''<VisioDocument {NS}>
-<DocumentSettings/>
-<Colors/>
-<FaceNames><FaceName NameU="Calibri" UnicodeRanges="-536859905 -1073732485 9 0" CharSets="536871423 0"/></FaceNames>
-<StyleSheets>
-<StyleSheet ID="0" NameU="No Style" Name="No Style">
-{cell("LineWeight", 0.0104)}{cell("LineColor", "#000000")}{cell("LinePattern", 1)}
-{cell("FillForegnd", "#FFFFFF")}{cell("FillPattern", 1)}
-{cell("VerticalAlign", 1)}{cell("LeftMargin", 0.1)}{cell("RightMargin", 0.1)}
-{cell("TopMargin", 0.05)}{cell("BottomMargin", 0.05)}
-<Section N="Character"><Row IX="0">{cell("Font", "Calibri")}{cell("Size", 0.125)}{cell("Color", "#000000")}{cell("Style", 0)}</Row></Section>
-<Section N="Paragraph"><Row IX="0">{cell("HorzAlign", 1)}</Row></Section>
-</StyleSheet>
-</StyleSheets>
-</VisioDocument>''',
-"visio/_rels/document.xml.rels": HDR + '''<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.microsoft.com/visio/2010/relationships/pages" Target="pages/pages.xml"/>
-</Relationships>''',
-"visio/pages/pages.xml": HDR + f'''<Pages {NS}>
-<Page ID="0" NameU="Архітектура" Name="Архітектура">
-<PageSheet>{cell("PageWidth", PW)}{cell("PageHeight", PH)}{cell("PageScale", 1)}{cell("DrawingScale", 1)}{cell("DrawingSizeType", 0)}</PageSheet>
-<Rel r:id="rId1"/>
-</Page>
-</Pages>''',
-"visio/pages/_rels/pages.xml.rels": HDR + '''<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.microsoft.com/visio/2010/relationships/page" Target="page1.xml"/>
-</Relationships>''',
-"visio/pages/page1.xml": HDR + f'<PageContents {NS}><Shapes>\n' + "\n".join(shapes) + '\n</Shapes></PageContents>',
-}
+NS = ("xmlns='http://schemas.microsoft.com/office/visio/2012/main' "
+      "xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships' "
+      "xml:space='preserve'")
+
+
+def template_path():
+    import vsdx
+    return os.path.join(os.path.dirname(vsdx.__file__), "media", "media.vsdx")
+
+
+def patch_pages(xml):
+    xml = re.sub(r"<Cell N='PageWidth' V='[^']*'/>", f"<Cell N='PageWidth' V='{PW}'/>", xml)
+    xml = re.sub(r"<Cell N='PageHeight' V='[^']*'/>", f"<Cell N='PageHeight' V='{PH}'/>", xml)
+    xml = re.sub(r"<Cell N='(PageScale|DrawingScale)' V='[^']*' U='MM'/>",
+                 r"<Cell N='\1' V='1' U='IN'/>", xml)
+    xml = re.sub(r"ViewCenterX='[^']*'", f"ViewCenterX='{PW / 2}'", xml)
+    xml = re.sub(r"ViewCenterY='[^']*'", f"ViewCenterY='{PH / 2}'", xml)
+    return xml.replace("NameU='Page-1' Name='Page-1'", "NameU='Page-1' Name='Архітектура'")
+
+
+def build(out):
+    page = ("<?xml version='1.0' encoding='utf-8' ?>\n"
+            f"<PageContents {NS}><Shapes>\n" + "\n".join(shapes) + "\n</Shapes></PageContents>")
+    with zipfile.ZipFile(template_path()) as tpl, \
+            zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for item in tpl.infolist():
+            data = tpl.read(item.filename)
+            if item.filename == "visio/pages/page1.xml":
+                data = page.encode("utf-8")
+            elif item.filename == "visio/pages/pages.xml":
+                data = patch_pages(data.decode("utf-8")).encode("utf-8")
+            elif item.filename == "visio/windows.xml":
+                text = data.decode("utf-8")
+                text = re.sub(r"ViewCenterX='[^']*'", f"ViewCenterX='{PW / 2}'", text)
+                text = re.sub(r"ViewCenterY='[^']*'", f"ViewCenterY='{PH / 2}'", text)
+                data = text.encode("utf-8")
+            z.writestr(item.filename, data)
+
 
 if __name__ == "__main__":
-    import os
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "architecture.vsdx")
-    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("[Content_Types].xml", files.pop("[Content_Types].xml"))
-        for name, data in files.items():
-            z.writestr(name, data)
+    build(out)
     print("written", out)

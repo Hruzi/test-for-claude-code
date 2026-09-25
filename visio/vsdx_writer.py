@@ -38,11 +38,6 @@ def _rect_geometry(no_line=0):
 </Section>'''
 
 
-def _char(size_pt, color, bold=False):
-    return (cell("Font", FONT) + cell("Size", size_pt / 72, "PT") + cell("Style", 1 if bold else 0)
-            + cell("Color", color))
-
-
 class Diagram:
     def __init__(self, width_px, height_px, scale, page_name):
         self.S = scale
@@ -86,10 +81,9 @@ class Diagram:
 {cell("VerticalAlign", 0 if label_top else 1)}
 {cell("TopMargin", 0.06)}{cell("LeftMargin", 0.1)}
 <Section N="Character">
-<Row IX="0">{_char(size, "#1F1F1F", bold)}</Row>
-<Row IX="1">{_char(size - 1, "#333333")}</Row>
+{char_row_full(0, size, "#1F1F1F", bold)}{char_row_full(1, size - 1, "#333333") if body else ""}
 </Section>
-<Section N="Paragraph"><Row IX="0">{cell("HorzAlign", 0 if label_top else 1)}</Row></Section>
+<Section N="Paragraph">{para_row_full(0, 0 if label_top else 1)}</Section>
 {_rect_geometry()}
 <Text>{text}</Text>
 </Shape>''')
@@ -141,15 +135,13 @@ class Diagram:
         extra = ""
         if valign is not None:
             extra += cell("VerticalAlign", valign)
-        char = _char(size, color, bold)
-        para = ""
-        if align is not None:
-            para = f'<Section N="Paragraph"><Row IX="0">{cell("HorzAlign", align)}</Row></Section>\n'
+        char = char_row_full(0, size, color, bold)
+        para = f'<Section N="Paragraph">{para_row_full(0, 1 if align is None else align)}</Section>\n'
         self.shapes.append(f'''<Shape ID="{self._nid()}" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
 {cell("PinX", self.X(x + w / 2))}{cell("PinY", self.Y(y + h / 2))}{cell("Width", W)}{cell("Height", H)}
 {cell("LocPinX", W / 2, f="Width*0.5")}{cell("LocPinY", H / 2, f="Height*0.5")}
 {cell("FillForegnd", "#FFFFFF")}{cell("FillPattern", 1)}{cell("LinePattern", 0)}{extra}
-<Section N="Character"><Row IX="0">{char}</Row></Section>
+<Section N="Character">{char}</Section>
 {para}{_rect_geometry(no_line=1)}
 <Text>{escape(text)}</Text>
 </Shape>''')

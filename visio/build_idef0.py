@@ -61,4 +61,6 @@ for x, text in zip(COLS, mechanisms):
     d.label(x - LW / 2, BY + BH + 140, LW, text, h=70, size=FONT, align=1, valign=0, color=BLACK)
 
 if __name__ == "__main__":
-    d.save(os.path.join(os.path.dirname(os.path.abspath(__file__)), "idef0_a0.vsdx"))
+    here = os.path.dirname(os.path.abspath(__file__))
+    d.save(os.path.join(here, "idef0_a0.vsdx"))
+    d.save_svg(os.path.join(here, "idef0_a0.svg"))

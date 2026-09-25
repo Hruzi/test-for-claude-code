@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1060" height="580" viewBox="0 0 1060 580">
+<rect x="5" y="18" width="797" height="137" rx="6.25" ry="6.25" fill="#F7F7F7" stroke="#A0A0A0" stroke-width="0.65" stroke-dasharray="6 4"/>
+<text x="11.25" y="29.23" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Клієнтський рівень — веб-браузер</text>
+<rect x="5" y="185" width="797" height="80" rx="6.25" ry="6.25" fill="#F7F7F7" stroke="#A0A0A0" stroke-width="0.65" stroke-dasharray="6 4"/>
+<text x="11.25" y="196.23" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Рівень доступу — REST API</text>
+<rect x="5" y="285" width="797" height="152" rx="6.25" ry="6.25" fill="#F7F7F7" stroke="#A0A0A0" stroke-width="0.65" stroke-dasharray="6 4"/>
+<text x="11.25" y="296.23" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Розрахунковий конвеєр (Python 3.11)</text>
+<rect x="5" y="462" width="797" height="105" rx="6.25" ry="6.25" fill="#F7F7F7" stroke="#A0A0A0" stroke-width="0.65" stroke-dasharray="6 4"/>
+<text x="11.25" y="473.23" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Рівень даних</text>
+<rect x="827" y="185" width="172" height="382" rx="6.25" ry="6.25" fill="#F7F7F7" stroke="#A0A0A0" stroke-width="0.65" stroke-dasharray="6 4"/>
+<text x="833.25" y="196.23" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Зовнішні геосервіси</text>
+<rect x="22" y="50" width="233" height="93" rx="5" ry="5" fill="#E8F0FB" stroke="#6B8FD6" stroke-width="0.65"/>
+<text x="101.52" y="90.96" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Інтерактивна карта</text>
+<text x="124.6" y="99.51" font-family="Arial" font-size="6.94" fill="#333333">Leaflet.js</text>
+<text x="98.14" y="107.84" font-family="Arial" font-size="6.94" fill="#333333">(маршрути, зони, агенти)</text>
+<rect x="271" y="50" width="233" height="93" rx="5" ry="5" fill="#E8F0FB" stroke="#6B8FD6" stroke-width="0.65"/>
+<text x="351.76" y="90.96" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Панель керування</text>
+<text x="361.44" y="99.51" font-family="Arial" font-size="6.94" fill="#333333">статистика місії,</text>
+<text x="354.27" y="107.84" font-family="Arial" font-size="6.94" fill="#333333">параметри сценарію</text>
+<rect x="519" y="50" width="233" height="93" rx="5" ry="5" fill="#E8F0FB" stroke="#6B8FD6" stroke-width="0.65"/>
+<text x="598.42" y="90.96" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Аналітичні графіки</text>
+<text x="622.57" y="99.51" font-family="Arial" font-size="6.94" fill="#333333">Chart.js,</text>
+<text x="601.65" y="107.84" font-family="Arial" font-size="6.94" fill="#333333">порівняння сценаріїв</text>
+<rect x="71" y="212" width="430" height="40" rx="5" ry="5" fill="#FDF0E1" stroke="#D9A05B" stroke-width="0.65"/>
+<text x="225.64" y="230.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">api_server.py — Flask REST API</text>
+<text x="216.06" y="239.17" font-family="Arial" font-size="6.94" fill="#333333">черга задач, конкурентний запуск конвеєра</text>
+<rect x="22" y="312" width="183" height="42" rx="5" ry="5" fill="#E8F5E9" stroke="#6BAF6E" stroke-width="0.65"/>
+<text x="74.65" y="331.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">mission_planning.py</text>
+<text x="73.16" y="340.17" font-family="Arial" font-size="6.94" fill="#333333">планування місій, ризики</text>
+<rect x="212" y="312" width="183" height="42" rx="5" ry="5" fill="#E8F5E9" stroke="#6BAF6E" stroke-width="0.65"/>
+<text x="277.46" y="331.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">production.py</text>
+<text x="266.94" y="340.17" font-family="Arial" font-size="6.94" fill="#333333">виробництво продукції</text>
+<rect x="403" y="312" width="178" height="42" rx="5" ry="5" fill="#E8F5E9" stroke="#6BAF6E" stroke-width="0.65"/>
+<text x="456.4" y="331.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">timeline_builder.py</text>
+<text x="451.38" y="340.17" font-family="Arial" font-size="6.94" fill="#333333">рух транспортних агентів</text>
+<rect x="593" y="312" width="178" height="42" rx="5" ry="5" fill="#E8F5E9" stroke="#6BAF6E" stroke-width="0.65"/>
+<text x="657.68" y="331.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">map_view.py</text>
+<text x="646.25" y="340.17" font-family="Arial" font-size="6.94" fill="#333333">побудова HTML-карти</text>
+<rect x="212" y="370" width="178" height="36" rx="5" ry="5" fill="#F3FAF3" stroke="#9CCB9E" stroke-width="0.65"/>
+<text x="277.99" y="386.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">optimizer.py</text>
+<text x="264.73" y="395.17" font-family="Arial" font-size="6.94" fill="#333333">VRP, Score (OR-Tools)</text>
+<rect x="403" y="370" width="178" height="36" rx="5" ry="5" fill="#F3FAF3" stroke="#9CCB9E" stroke-width="0.65"/>
+<text x="469.64" y="386.63" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">analytics.py</text>
+<text x="460.14" y="395.17" font-family="Arial" font-size="6.94" fill="#333333">порівняльні графіки</text>
+<rect x="71" y="489" width="430" height="60" rx="5" ry="5" fill="#F1E8F5" stroke="#A67BB5" stroke-width="0.65"/>
+<text x="256.63" y="513.46" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Сховище JSON</text>
+<text x="213.81" y="522.01" font-family="Arial" font-size="6.94" fill="#333333">cargo_mission, mission_plan, production_plan,</text>
+<text x="233.06" y="530.34" font-family="Arial" font-size="6.94" fill="#333333">agent_timeline, cities, routes, кеші</text>
+<rect x="839" y="213" width="147" height="67" rx="5" ry="5" fill="#FDECEC" stroke="#D66B6B" stroke-width="0.65"/>
+<text x="885.8" y="245.13" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">DeepState API</text>
+<text x="877.16" y="253.67" font-family="Arial" font-size="6.94" fill="#333333">дані про лінію фронту</text>
+<rect x="839" y="293" width="147" height="67" rx="5" ry="5" fill="#FDECEC" stroke="#D66B6B" stroke-width="0.65"/>
+<text x="900.78" y="325.13" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">OSRM</text>
+<text x="874.4" y="333.67" font-family="Arial" font-size="6.94" fill="#333333">автомобільні маршрути</text>
+<rect x="839" y="373" width="147" height="67" rx="5" ry="5" fill="#FDECEC" stroke="#D66B6B" stroke-width="0.65"/>
+<text x="887.1" y="405.13" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">Overpass API</text>
+<text x="883.65" y="413.67" font-family="Arial" font-size="6.94" fill="#333333">дані про залізниці</text>
+<rect x="839" y="453" width="147" height="67" rx="5" ry="5" fill="#FDECEC" stroke="#D66B6B" stroke-width="0.65"/>
+<text x="884.5" y="485.13" font-family="Arial" font-size="7.81" font-weight="bold" fill="#1F1F1F">OSM / CartoDB</text>
+<text x="880.05" y="493.67" font-family="Arial" font-size="6.94" fill="#333333">тайли базової карти</text>
+<polyline points="376,143 376,205.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="376,212 373.81,205.75 378.19,205.75" fill="#444444" stroke="none"/>
+<polyline points="394,212 394,149.25" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="394,143 396.19,149.25 391.81,149.25" fill="#444444" stroke="none"/>
+<rect x="400" y="158" width="60" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="410.11" y="167.33" font-family="Arial" font-size="6.51" fill="#333333">HTTP / JSON</text>
+<polyline points="384,252 384,305.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="384,312 381.81,305.75 386.19,305.75" fill="#444444" stroke="none"/>
+<rect x="392" y="262" width="80" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="407.5" y="271.33" font-family="Arial" font-size="6.51" fill="#333333">запуск конвеєра</text>
+<polyline points="205,333 205.75,333" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="212,333 205.75,335.19 205.75,330.81" fill="#444444" stroke="none"/>
+<polyline points="395,333 396.75,333" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="403,333 396.75,335.19 396.75,330.81" fill="#444444" stroke="none"/>
+<polyline points="581,333 586.75,333" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="593,333 586.75,335.19 586.75,330.81" fill="#444444" stroke="none"/>
+<polyline points="301,354 301,363.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="301,370 298.81,363.75 303.19,363.75" fill="#444444" stroke="none"/>
+<polyline points="492,354 492,363.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="492,370 489.81,363.75 494.19,363.75" fill="#444444" stroke="none"/>
+<polyline points="277,437 277,482.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="277,489 274.81,482.75 279.19,482.75" fill="#444444" stroke="none"/>
+<polyline points="295,489 295,443.25" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="295,437 297.19,443.25 292.81,443.25" fill="#444444" stroke="none"/>
+<rect x="240" y="452" width="95" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="254.52" y="461.33" font-family="Arial" font-size="6.51" fill="#333333">читання / запис JSON</text>
+<polyline points="839,246 507.24,226.37" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="501,226 507.37,224.19 507.11,228.55" fill="#444444" stroke="none"/>
+<rect x="595" y="222" width="150" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="617.31" y="231.33" font-family="Arial" font-size="6.51" fill="#333333">GeoJSON лінії фронту (кешується)</text>
+<polyline points="839,406 812,406 812,291 301,291 301,305.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="301,312 298.81,305.75 303.19,305.75" fill="#444444" stroke="none"/>
+<rect x="525" y="276" width="80" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="537.84" y="285.33" font-family="Arial" font-size="6.51" fill="#333333">мережа залізниць</text>
+<polyline points="839,326 777.25,326" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="771,326 777.25,323.81 777.25,328.19" fill="#444444" stroke="none"/>
+<rect x="773" y="331" width="64" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="782.02" y="340.33" font-family="Arial" font-size="6.51" fill="#333333">геометрія доріг</text>
+<polyline points="986,486 1028,486 1028,8 138,8 138,43.75" fill="none" stroke="#444444" stroke-width="0.87"/>
+<polygon points="138,50 135.81,43.75 140.19,43.75" fill="#444444" stroke="none"/>
+<rect x="1003" y="238" width="52" height="14" fill="#FFFFFF" stroke="none"/>
+<text x="1010.9" y="247.33" font-family="Arial" font-size="6.51" fill="#333333">тайли карти</text>
+</svg>

@@ -8,6 +8,10 @@ import re
 import zipfile
 from xml.sax.saxutils import escape
 
+from svg_writer import SvgCanvas
+
+STYLE_MARGIN = 4 / 72   # поля тексту в стилі Normal шаблону, дюйми
+
 NS = ("xmlns='http://schemas.microsoft.com/office/visio/2012/main' "
       "xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships' "
       "xml:space='preserve'")
@@ -34,6 +38,8 @@ class Diagram:
         self.page_name = page_name
         self.shapes = []
         self._id = 0
+        # Паралельно будується SVG-варіант тієї самої схеми (у пікселях схеми).
+        self.svg = SvgCanvas(width_px, height_px, pt_per_px=scale * 72)
 
     def X(self, px): return px * self.S
     def Y(self, py): return self.PH - py * self.S   # у Visio вісь Y спрямована вгору
@@ -45,6 +51,14 @@ class Diagram:
     def box(self, x, y, w, h, title, body="", fill="#FFFFFF", line="#999999",
             dashed=False, label_top=False, round_=0.08, size=9, line_weight=0.0104, bold=True):
         """Прямокутник із жирним заголовком і (необов'язково) звичайним текстом під ним."""
+        self.svg.rect(x, y, w, h, fill=fill, stroke=line, stroke_width=line_weight / self.S,
+                      rx=round_ / self.S, dashed=dashed)
+        runs = [(title, size, bold, "#1F1F1F")]
+        if body:
+            runs.append((body, size - 1, False, "#333333"))
+        self.svg.text_block(x, y, w, h, runs, align=0 if label_top else 1,
+                            valign=0 if label_top else 1,
+                            margin_x=0.1 / self.S, margin_y=0.06 / self.S)
         X, Y = self.X, self.Y
         cx, cy = X(x + w / 2), Y(y + h / 2)
         W, H = X(w), X(h)
@@ -70,6 +84,8 @@ class Diagram:
 
     def arrow(self, *pts, color="#444444", weight=0.0139):
         """Ламана зі стрілкою на кінці; pts — точки у пікселях."""
+        # EndArrow=4, EndArrowSize=1 у Visio — наконечник приблизно 0.1 × 0.07 дюйма
+        self.svg.arrow(pts, color, weight / self.S, head_len=0.1 / self.S, head_w=0.07 / self.S)
         xs = [self.X(p[0]) for p in pts]
         ys = [self.Y(p[1]) for p in pts]
         mx, my = min(xs), min(ys)
@@ -91,6 +107,11 @@ class Diagram:
 
         align: 0 — ліворуч, 1 — по центру, 2 — праворуч; valign: 0 — вгорі, 1 — по центру, 2 — внизу.
         """
+        self.svg.rect(x, y, w, h, fill="#FFFFFF")
+        self.svg.text_block(x, y, w, h, [(text, size, bold, color)],
+                            align=1 if align is None else align,
+                            valign=1 if valign is None else valign,
+                            margin_x=STYLE_MARGIN / self.S, margin_y=STYLE_MARGIN / self.S)
         W, H = self.X(w), self.X(h)
         extra = ""
         if valign is not None:
@@ -131,6 +152,9 @@ class Diagram:
         xml = self._view_center(xml)
         return xml.replace("NameU='Page-1' Name='Page-1'",
                            f"NameU='Page-1' Name='{escape(self.page_name)}'")
+
+    def save_svg(self, out):
+        self.svg.save(out)
 
     def save(self, out):
         page = ("<?xml version='1.0' encoding='utf-8' ?>\n"

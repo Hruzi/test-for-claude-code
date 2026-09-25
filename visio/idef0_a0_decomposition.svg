@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="2200" height="1230" viewBox="0 0 2200 1230">
+<rect x="200" y="170" width="220" height="130" fill="#FFFFFF" stroke="#000000" stroke-width="1.66"/>
+<text x="211.77" y="231.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">Формування вхідних даних місії</text>
+<text x="279.74" y="247.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">та мережі</text>
+<rect x="206" y="272" width="40" height="24" fill="#FFFFFF" stroke="none"/>
+<text x="210.44" y="288.38" font-family="Arial" font-size="12.22" fill="#000000">A1</text>
+<rect x="570" y="360" width="220" height="130" fill="#FFFFFF" stroke="#000000" stroke-width="1.66"/>
+<text x="582.42" y="421.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">Оцінювання ризиків логістичної</text>
+<text x="658.35" y="437.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">мережі</text>
+<rect x="576" y="462" width="40" height="24" fill="#FFFFFF" stroke="none"/>
+<text x="580.44" y="478.38" font-family="Arial" font-size="12.22" fill="#000000">A2</text>
+<rect x="940" y="550" width="220" height="130" fill="#FFFFFF" stroke="#000000" stroke-width="1.66"/>
+<text x="972.67" y="611.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">Генерація та оптимізація</text>
+<text x="983.75" y="627.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">сценаріїв постачання</text>
+<rect x="946" y="652" width="40" height="24" fill="#FFFFFF" stroke="none"/>
+<text x="950.44" y="668.38" font-family="Arial" font-size="12.22" fill="#000000">A3</text>
+<rect x="1310" y="740" width="220" height="130" fill="#FFFFFF" stroke="#000000" stroke-width="1.66"/>
+<text x="1344.06" y="801.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">Імітаційне моделювання</text>
+<text x="1373.16" y="817.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">виконання місії</text>
+<rect x="1316" y="842" width="40" height="24" fill="#FFFFFF" stroke="none"/>
+<text x="1320.44" y="858.38" font-family="Arial" font-size="12.22" fill="#000000">A4</text>
+<rect x="1680" y="930" width="220" height="130" fill="#FFFFFF" stroke="#000000" stroke-width="1.66"/>
+<text x="1700.63" y="991.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">Візуалізація та порівняльний</text>
+<text x="1732.62" y="1007.77" font-family="Arial" font-size="13.33" fill="#1F1F1F">аналіз результатів</text>
+<rect x="1686" y="1032" width="40" height="24" fill="#FFFFFF" stroke="none"/>
+<text x="1690.44" y="1048.38" font-family="Arial" font-size="12.22" fill="#000000">A5</text>
+<rect x="170" y="30" width="280" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="215.71" y="88.6" font-family="Arial" font-size="12.22" fill="#000000">Схеми та формати даних (JSON)</text>
+<polyline points="310,100 310,162" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="310,170 307.2,162 312.8,162" fill="#000000" stroke="none"/>
+<rect x="540" y="30" width="280" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="573.5" y="88.6" font-family="Arial" font-size="12.22" fill="#000000">Методика зонування ризиків (розд. 2)</text>
+<polyline points="680,100 680,352" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="680,360 677.2,352 682.8,352" fill="#000000" stroke="none"/>
+<rect x="954" y="30" width="280" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="959.06" y="73.93" font-family="Arial" font-size="12.22" fill="#000000">Моделі (3.27)–(3.29), (3.31)–(3.35); ваги ω1, ω2,</text>
+<text x="1085.83" y="88.6" font-family="Arial" font-size="12.22" fill="#000000">ω3</text>
+<polyline points="1094,100 1094,542" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1094,550 1091.2,542 1096.8,542" fill="#000000" stroke="none"/>
+<rect x="1324" y="30" width="280" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="1351.48" y="88.6" font-family="Arial" font-size="12.22" fill="#000000">Дедлайни, потужність, мінімальні партії</text>
+<polyline points="1464,100 1464,732" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1464,740 1461.2,732 1466.8,732" fill="#000000" stroke="none"/>
+<rect x="1650" y="30" width="280" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="1705.7" y="88.6" font-family="Arial" font-size="12.22" fill="#000000">Критерії порівняння сценаріїв</text>
+<polyline points="1790,100 1790,922" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1790,930 1787.2,922 1792.8,922" fill="#000000" stroke="none"/>
+<polyline points="310,390 310,308" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="310,300 312.8,308 307.2,308" fill="#000000" stroke="none"/>
+<rect x="195" y="395" width="230" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="235.62" y="411.15" font-family="Arial" font-size="12.22" fill="#000000">utils.py, extract_railways.py</text>
+<polyline points="680,560 680,498" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="680,490 682.8,498 677.2,498" fill="#000000" stroke="none"/>
+<rect x="565" y="565" width="230" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="625.65" y="581.15" font-family="Arial" font-size="12.22" fill="#000000">mission.py; Shapely</text>
+<polyline points="1050,880 1050,688" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1050,680 1052.8,688 1047.2,688" fill="#000000" stroke="none"/>
+<rect x="935" y="885" width="230" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="966.11" y="901.15" font-family="Arial" font-size="12.22" fill="#000000">optimizer.py; Google OR-Tools</text>
+<polyline points="1420,960 1420,878" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1420,870 1422.8,878 1417.2,878" fill="#000000" stroke="none"/>
+<rect x="1305" y="965" width="230" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="1328.96" y="981.15" font-family="Arial" font-size="12.22" fill="#000000">production.py, timeline_builder.py</text>
+<polyline points="1790,1150 1790,1068" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1790,1060 1792.8,1068 1787.2,1068" fill="#000000" stroke="none"/>
+<rect x="1675" y="1155" width="230" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="1689.46" y="1171.15" font-family="Arial" font-size="12.22" fill="#000000">map_view.py, analytics.py; Leaflet.js,</text>
+<text x="1768.95" y="1185.82" font-family="Arial" font-size="12.22" fill="#000000">Chart.js</text>
+<rect x="20" y="164" width="170" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="24.44" y="185.93" font-family="Arial" font-size="12.22" fill="#000000">Параметри місії та</text>
+<text x="24.44" y="200.6" font-family="Arial" font-size="12.22" fill="#000000">транспорту</text>
+<polyline points="20,210 192,210" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="200,210 192,212.8 192,207.2" fill="#000000" stroke="none"/>
+<rect x="20" y="219" width="170" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="24.44" y="240.93" font-family="Arial" font-size="12.22" fill="#000000">Геодані: OSM, OSRM,</text>
+<text x="24.44" y="255.6" font-family="Arial" font-size="12.22" fill="#000000">DeepState</text>
+<polyline points="20,265 192,265" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="200,265 192,267.8 192,262.2" fill="#000000" stroke="none"/>
+<polyline points="420,210 1376,210 1376,732" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1376,740 1373.2,732 1378.8,732" fill="#000000" stroke="none"/>
+<polyline points="1006,210 1006,542" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1006,550 1003.2,542 1008.8,542" fill="#000000" stroke="none"/>
+<rect x="440" y="164" width="220" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="444.44" y="200.6" font-family="Arial" font-size="12.22" fill="#000000">Дані місії, довідники маршрутів</text>
+<polyline points="420,270 495,270 495,425 562,425" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="570,425 562,427.8 562,422.2" fill="#000000" stroke="none"/>
+<rect x="503" y="300" width="160" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="507.44" y="316.15" font-family="Arial" font-size="12.22" fill="#000000">Нормалізовані дані місії</text>
+<text x="507.44" y="330.82" font-family="Arial" font-size="12.22" fill="#000000">та мережі</text>
+<polyline points="790,400 865,400 865,615 932,615" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="940,615 932,617.8 932,612.2" fill="#000000" stroke="none"/>
+<rect x="873" y="430" width="128" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="877.44" y="446.15" font-family="Arial" font-size="12.22" fill="#000000">Зони ризику,</text>
+<text x="877.44" y="460.82" font-family="Arial" font-size="12.22" fill="#000000">коефіцієнти втрат</text>
+<text x="877.44" y="475.49" font-family="Arial" font-size="12.22" fill="#000000">маршрутів</text>
+<polyline points="790,460 840,460 840,835 1302,835" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1310,835 1302,837.8 1302,832.2" fill="#000000" stroke="none"/>
+<rect x="1170" y="805" width="130" height="26" fill="#FFFFFF" stroke="none"/>
+<text x="1192.26" y="823.6" font-family="Arial" font-size="12.22" fill="#000000">Коефіцієнти втрат</text>
+<polyline points="1160,615 1235,615 1235,790 1302,790" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1310,790 1302,792.8 1302,787.2" fill="#000000" stroke="none"/>
+<rect x="1243" y="640" width="128" height="88" fill="#FFFFFF" stroke="none"/>
+<text x="1247.44" y="656.15" font-family="Arial" font-size="12.22" fill="#000000">Раціональний</text>
+<text x="1247.44" y="670.82" font-family="Arial" font-size="12.22" fill="#000000">сценарій: маршрути,</text>
+<text x="1247.44" y="685.49" font-family="Arial" font-size="12.22" fill="#000000">транспорт, план</text>
+<text x="1247.44" y="700.15" font-family="Arial" font-size="12.22" fill="#000000">рейсів</text>
+<polyline points="1530,805 1605,805 1605,995 1672,995" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="1680,995 1672,997.8 1672,992.2" fill="#000000" stroke="none"/>
+<rect x="1613" y="830" width="150" height="66" fill="#FFFFFF" stroke="none"/>
+<text x="1617.44" y="846.15" font-family="Arial" font-size="12.22" fill="#000000">Виробничий розклад,</text>
+<text x="1617.44" y="860.82" font-family="Arial" font-size="12.22" fill="#000000">таймлайн агентів,</text>
+<text x="1617.44" y="875.49" font-family="Arial" font-size="12.22" fill="#000000">статистика втрат</text>
+<rect x="1920" y="924" width="250" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="1980.25" y="945.93" font-family="Arial" font-size="12.22" fill="#000000">Інтерактивна карта, порівняльна</text>
+<text x="2076.77" y="960.6" font-family="Arial" font-size="12.22" fill="#000000">аналітика, звіти</text>
+<polyline points="1900,970 2172,970" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="2180,970 2172,972.8 2172,967.2" fill="#000000" stroke="none"/>
+<rect x="1920" y="984" width="250" height="44" fill="#FFFFFF" stroke="none"/>
+<text x="1947.18" y="1020.6" font-family="Arial" font-size="12.22" fill="#000000">Оцінки показників: час, вартість, ризик</text>
+<polyline points="1900,1030 2172,1030" fill="none" stroke="#000000" stroke-width="1.66"/>
+<polygon points="2180,1030 2172,1032.8 2172,1027.2" fill="#000000" stroke="none"/>
+</svg>

@@ -70,4 +70,6 @@ arrow((986, 486), (1028, 486), (1028, 8), (138, 8), (138, 50))     # тайли 
 label(1003, 238, 52, "тайли карти")
 
 if __name__ == "__main__":
-    d.save(os.path.join(os.path.dirname(os.path.abspath(__file__)), "architecture.vsdx"))
+    here = os.path.dirname(os.path.abspath(__file__))
+    d.save(os.path.join(here, "architecture.vsdx"))
+    d.save_svg(os.path.join(here, "architecture.svg"))

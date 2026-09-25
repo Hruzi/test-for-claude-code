@@ -109,4 +109,6 @@ for y, s in [(top(4) + 40, "Інтерактивна карта, порівня�
     d.arrow((right(4), y), (2180, y), **ARROW)
 
 if __name__ == "__main__":
-    d.save(os.path.join(os.path.dirname(os.path.abspath(__file__)), "idef0_a0_decomposition.vsdx"))
+    here = os.path.dirname(os.path.abspath(__file__))
+    d.save(os.path.join(here, "idef0_a0_decomposition.vsdx"))
+    d.save_svg(os.path.join(here, "idef0_a0_decomposition.svg"))

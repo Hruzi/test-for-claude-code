@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="480" height="220" viewBox="0 0 480 220">
+<rect x="20" y="20" width="440" height="28" fill="#FFFFFF" stroke="#999999" stroke-width="1"/>
+<text x="28" y="39.73" font-family="Arial" font-size="16" fill="#000000">іваіваівавіаіваіва</text>
+<rect x="20" y="56" width="440" height="28" fill="#FFFFFF" stroke="#999999" stroke-width="1"/>
+<text x="28" y="75.73" font-family="Arial" font-size="16" font-weight="bold" fill="#000000">Сховище JSON</text>
+<rect x="20" y="92" width="440" height="28" fill="#FFFFFF" stroke="#999999" stroke-width="1"/>
+<text x="28" y="111.73" font-family="Arial" font-size="16" fill="#000000">запуск конвеєра</text>
+<rect x="20" y="128" width="440" height="28" fill="#FFFFFF" stroke="#999999" stroke-width="1"/>
+<text x="28" y="147.73" font-family="Arial" font-size="16" fill="#000000">мережа залізниць</text>
+<rect x="20" y="164" width="440" height="28" fill="#FFFFFF" stroke="#999999" stroke-width="1"/>
+<text x="28" y="183.73" font-family="Arial" font-size="16" fill="#000000">Latin text: api_server.py — Flask REST API</text>
+</svg>

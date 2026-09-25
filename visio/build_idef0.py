@@ -62,5 +62,5 @@ for x, text in zip(COLS, mechanisms):
 
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
-    d.save(os.path.join(here, "idef0_a0.vsdx"))
+    d.save(os.path.join(here, "schema_2.vsdx"))
     d.save_svg(os.path.join(here, "idef0_a0.svg"))

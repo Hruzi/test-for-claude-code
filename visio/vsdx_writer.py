@@ -200,3 +200,24 @@ class Diagram:
                     data = self._view_center(data.decode("utf-8")).encode("utf-8")
                 z.writestr(item.filename, data)
         print("written", out)
+
+
+# ---- Повні рядки Character/Paragraph, як їх записує сам Visio ----
+# Visio зберігає в кожному рядку всі 17 клітинок Character (див. стиль «No Style»
+# у document.xml шаблону). Рядок IX≥1 не має з чого успадкувати пропущені
+# клітинки: стилі задають лише рядок IX=0.
+def char_row_full(ix, size_pt, color="#000000", bold=False, font=FONT, lang="uk-UA"):
+    cells = [("Font", font), ("Color", color), ("Style", 1 if bold else 0), ("Case", 0), ("Pos", 0),
+             ("FontScale", 1), ("Size", size_pt / 72, "PT"), ("DblUnderline", 0), ("Overline", 0),
+             ("Strikethru", 0), ("DoubleStrikethrough", 0), ("Letterspace", 0), ("ColorTrans", 0),
+             ("AsianFont", 0), ("ComplexScriptFont", 0), ("ComplexScriptSize", -1), ("LangID", lang)]
+    if font is None:
+        cells = cells[1:]
+    return f'<Row IX="{ix}">' + "".join(cell(*c) for c in cells) + "</Row>"
+
+
+def para_row_full(ix, align=1):
+    cells = [("IndFirst", 0), ("IndLeft", 0), ("IndRight", 0), ("SpLine", -1.2), ("SpBefore", 0),
+             ("SpAfter", 0), ("HorzAlign", align), ("Bullet", 0), ("BulletStr", ""), ("BulletFont", 0),
+             ("BulletFontSize", -1), ("TextPosAfterBullet", 0), ("Flags", 0)]
+    return f'<Row IX="{ix}">' + "".join(cell(*c) for c in cells) + "</Row>"

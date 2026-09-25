@@ -16,6 +16,9 @@ REQUIRED_PARTS = [
     "visio/document.xml", "visio/_rels/document.xml.rels", "visio/windows.xml",
     "visio/pages/pages.xml", "visio/pages/_rels/pages.xml.rels", "visio/pages/page1.xml",
 ]
+CHAR_CELLS = ["Font", "Color", "Style", "Case", "Pos", "FontScale", "Size", "DblUnderline",
+              "Overline", "Strikethru", "DoubleStrikethrough", "Letterspace", "ColorTrans",
+              "AsianFont", "ComplexScriptFont", "ComplexScriptSize", "LangID"]
 IMAGE_EXT = re.compile(r"\.(png|jpe?g|gif|bmp|emf|wmf|svg|tiff?)$", re.I)
 
 # Рядки, які мають бути в схемах цілим текстом (кирилиця, латиниця, довгі рядки)
@@ -113,29 +116,30 @@ def check(path):
     ok.append(f"{len(shapes)} фігур Visio: {len(two_d)} з текстом (блоки/підписи), "
               f"{len(one_d)} ліній 1-D, з них {len(arrows)} зі стрілками")
 
-    # Текст
+    # Текст. Visio Desktop не підставляє значення за замовчуванням для клітинок,
+    # яких бракує в рядку Character з IX≥1 (стилі задають лише рядок 0): пропущений
+    # FontScale дає ширину символів 0 — увесь рядок злипається в один символ.
     fonts_ok = True
     for s in two_d:
         rows = s.findall(V + "Section[@N='Character']/" + V + "Row")
         row_ix = {r.get("IX") for r in rows}
         for r in rows:
             c = cells(r)
+            miss = [n for n in CHAR_CELLS if n not in c]
+            need(not miss, f"фігура {s.get('ID')}: рядок Character IX={r.get('IX')} без клітинок {miss}")
+            need(float(c["FontScale"]) == 1 and float(c["Letterspace"]) == 0,
+                 f"фігура {s.get('ID')}: FontScale={c['FontScale']}, Letterspace={c['Letterspace']}")
             fonts_ok &= c.get("Font") == "Arial"
-            need("Letterspace" not in c and "FontScale" not in c,
-                 f"фігура {s.get('ID')}: змінено міжлітерний інтервал/масштаб")
         cps = s.find(V + "Text").findall(V + "cp")
+        used = {cp.get("IX") for cp in cps} or {"0"}
+        need(used <= row_ix or not rows, f"фігура {s.get('ID')}: посилання на неіснуючий рядок шрифту")
+        need(row_ix <= used, f"фігура {s.get('ID')}: зайві рядки Character {sorted(row_ix - used)}")
         need(len(cps) <= 2, f"фігура {s.get('ID')}: текст розбитий на {len(cps)} фрагментів")
-        for cp in cps:
-            need(cp.get("IX") in row_ix, f"фігура {s.get('ID')}: посилання на неіснуючий рядок шрифту")
     need(fonts_ok, "не всі фрагменти тексту мають шрифт Arial")
     doc = z.read("visio/document.xml").decode()
     need("NameU='Arial'" in doc, "Arial не зареєстровано у списку шрифтів документа")
-    # Стилі, з яких успадковується текст, не повинні стискати/розтягувати символи
-    for m in re.finditer(r"<Cell N='(FontScale|Letterspace)' V='([^']*)'", doc):
-        need((m.group(1), float(m.group(2))) in (("FontScale", 1.0), ("Letterspace", 0.0)),
-             f"у стилях задано {m.group(1)}={m.group(2)}")
-    ok.append("весь текст — шрифт Arial; міжлітерний інтервал 0, масштаб символів 100% "
-              "(аналогів textLength/letter-spacing немає); кожен текст — 1–2 суцільні фрагменти")
+    ok.append("кожен рядок Character має всі 17 клітинок, як у Visio (FontScale=1, Letterspace=0), "
+              "шрифт Arial; немає зайвих чи неіснуючих рядків")
 
     texts = [shape_text(s) for s in two_d]
     alltext = "\n".join(texts)
